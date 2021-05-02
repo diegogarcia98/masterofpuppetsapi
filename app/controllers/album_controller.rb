@@ -5,7 +5,7 @@ class AlbumController < ApplicationController
         albums = Album.all
         albums_filter = []
         albums.each do |album|
-            new_format = {album_id: album["album_id"], name: album["name"], genre: album["genre"], 
+            new_format = {name: album["name"], genre: album["genre"], 
             artist: album["artist"],tracks:album["tracks"],self: album["self"]}
             albums_filter.append(new_format)
         end
@@ -22,7 +22,7 @@ class AlbumController < ApplicationController
             album = Album.new(album_params)
 
             if album.save
-                render json: {album_id: album["album_id"], name: album["name"], genre: album["genre"], 
+                render json: {name: album["name"], genre: album["genre"], 
                 artist: album["artist"],tracks:album["tracks"],self: album["self"]}, status: 201
 
             else
@@ -34,7 +34,7 @@ class AlbumController < ApplicationController
                 elsif error == "album_id"
                     
                     existente =Album.find_by(album_id: album["album_id"])
-                    render json: {album_id: existente["album_id"], name: existente["name"], genre: existente["genre"], 
+                    render json: {name: existente["name"], genre: existente["genre"], 
                     artist: existente["artist"],tracks:existente["tracks"],self: existente["self"]}, status: 409                
                 else
                     render json: {status: "405", message: error}, status: 405
@@ -49,7 +49,7 @@ class AlbumController < ApplicationController
         if album == nil
             render json: {status: "404", message: "Album no existe"}, status: 404
         else
-            render json: {album_id: album["album_id"], name: album["name"], genre: album["genre"], 
+            render json: {name: album["name"], genre: album["genre"], 
             artist: album["artist"],tracks:album["tracks"],self: album["self"]}, status: 200
         end
     end
@@ -66,7 +66,7 @@ class AlbumController < ApplicationController
             albums_artist=[]
             albums.each do |album|
                 if album["artist"]==artist_url
-                    albums_filter={album_id: album["album_id"], name: album["name"], genre: album["genre"], 
+                    albums_filter={name: album["name"], genre: album["genre"], 
                     artist: album["artist"],tracks:album["tracks"],self: album["self"]}
                     albums_artist.append(albums_filter)
                 end
@@ -88,7 +88,7 @@ class AlbumController < ApplicationController
             end
             tracks_filter = []
             tracks.each do |track|
-                new_format = {track_id: track["track_id"], name: track["name"], duration: track["duration"], 
+                new_format = {name: track["name"], duration: track["duration"], 
                 times_played: track["times_played"],artist: track["artist"],album:track["album"],self: track["self"]}
                 tracks_filter.append(new_format)
             end
@@ -128,7 +128,7 @@ class AlbumController < ApplicationController
                 i = i+1
             end
         end
-        artist_params = {album_id: name_codificado, name: params[:name], genre: params[:genre],artist: "https://ridethelightningrecords.herokuapp.com/"+params[:artist_id],
-        tracks: "https://ridethelightningrecords.herokuapp.com/albums/"+name_codificado+"/tracks",self: "https://ridethelightningrecords.herokuapp.com/albums/"+name_codificado}
+        artist_params = {album_id: name_codificado, name: params[:name], genre: params[:genre],artist: "https://masterofpuppetsapi.herokuapp.com/"+params[:artist_id],
+        tracks: "https://masterofpuppetsapi.herokuapp.com/albums/"+name_codificado+"/tracks",self: "https://masterofpuppetsapi.herokuapp.com/albums/"+name_codificado}
     end  
 end

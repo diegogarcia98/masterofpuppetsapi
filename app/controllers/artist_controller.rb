@@ -4,7 +4,7 @@ class ArtistController < ApplicationController
         artists = Artist.all
         artists_filter = []
         artists.each do |artist|
-            new_format = {artist_id: artist["artist_id"], name: artist["name"], age: artist["age"], 
+            new_format = {name: artist["name"], age: artist["age"], 
             albums: artist["albums"],tracks:artist["tracks"],self: artist["self"]}
             artists_filter.append(new_format)
         end
@@ -16,7 +16,7 @@ class ArtistController < ApplicationController
         artist = Artist.new(artist_params)
 
         if artist.save
-            render json: {artist_id: artist["artist_id"], name: artist["name"], age: artist["age"], 
+            render json: {name: artist["name"], age: artist["age"], 
             albums: artist["albums"],tracks:artist["tracks"],self: artist["self"]}, status: 201
 
         else
@@ -28,7 +28,7 @@ class ArtistController < ApplicationController
             elsif error == "artist_id"
                 
                 existente =Artist.find_by(artist_id: artist["artist_id"])
-                render json: {artist_id: existente["artist_id"], name: existente["name"], age: existente["age"], 
+                render json: {name: existente["name"], age: existente["age"], 
                 albums: existente["albums"],tracks: existente["tracks"], 
                 self: existente["self"]}, status: 409                
             else
@@ -43,7 +43,7 @@ class ArtistController < ApplicationController
         if artist == nil
             render json: {status: "404", message: "Artista no existe"}, status: 404
         else
-            render json: {artist_id: artist["artist_id"], name: artist["name"], age: artist["age"], 
+            render json: {name: artist["name"], age: artist["age"], 
                 albums: artist["albums"],tracks: artist["tracks"], 
                 self: artist["self"]}, status: 200
         end
@@ -62,7 +62,7 @@ class ArtistController < ApplicationController
             end
             tracks_filter = []
             tracks.each do |track|
-                new_format = {track_id: track["track_id"], name: track["name"], duration: track["duration"], 
+                new_format = {name: track["name"], duration: track["duration"], 
                 times_played: track["times_played"],artist: track["artist"],album:track["album"],self: track["self"]}
                 tracks_filter.append(new_format)
             end
@@ -113,7 +113,7 @@ class ArtistController < ApplicationController
                 i = i+1
             end
         end
-        artist_params = {artist_id: name_codificado, name: params[:name], age: params[:age],albums: "https://ridethelightningrecords.herokuapp.com/artists/"+name_codificado+"/albums",
-        tracks: "https://ridethelightningrecords.herokuapp.com/"+name_codificado+"/tracks",self: "https://ridethelightningrecords.herokuapp.com/artists/"+name_codificado}
+        artist_params = {artist_id: name_codificado, name: params[:name], age: params[:age],albums: "https://masterofpuppetsapi.herokuapp.com/artists/"+name_codificado+"/albums",
+        tracks: "https://masterofpuppetsapi.herokuapp.com/"+name_codificado+"/tracks",self: "https://masterofpuppetsapi.herokuapp.com/artists/"+name_codificado}
     end  
 end

@@ -4,7 +4,7 @@ class TrackController < ApplicationController
         tracks = Track.all
         tracks_filter = []
         tracks.each do |track|
-            new_format = {track_id: track["track_id"], name: track["name"], duration: track["duration"], 
+            new_format = {name: track["name"], duration: track["duration"], 
             times_played: track["times_played"],artist: track["artist"],album:track["album"],self: track["self"]}
             tracks_filter.append(new_format)
         end
@@ -22,7 +22,7 @@ class TrackController < ApplicationController
             track = Track.new(track_params)
 
             if track.save
-                render json: {track_id: track["track_id"], name: track["name"], duration: track["duration"], 
+                render json: {name: track["name"], duration: track["duration"], 
                 times_played: track["times_played"], artist: track["artist"],album: track["album"],self: track["self"]}, status: 201
 
             else
@@ -34,7 +34,7 @@ class TrackController < ApplicationController
                 elsif error == "track_id"
                     
                     existente =Track.find_by(track_id: track["track_id"])
-                    render json: {track_id: existente["track_id"], name: existente["name"], duration: existente["duration"], 
+                    render json: {name: existente["name"], duration: existente["duration"], 
                     times_played: existente["times_played"],artist: existente["artist"],album:existente["album"],self: existente["self"]}, status: 409                
                 else
                     render json: {status: "405", message: error}, status: 405
@@ -50,7 +50,7 @@ class TrackController < ApplicationController
         if track == nil
             render json: {status: "404", message: "Canción no existe"}, status: 404
         else
-            render json: {track_id: track["track_id"], name: track["name"], duration: track["duration"], 
+            render json: {name: track["name"], duration: track["duration"], 
             times_played: track["times_played"], artist: track["artist"],album: track["album"],self: track["self"]}, status: 200
         end
     end
@@ -66,7 +66,7 @@ class TrackController < ApplicationController
             tracks_artist=[]
             tracks.each do |track|
                 if track["artist"]==artist_url
-                    tracks_filter={track_id: track["track_id"], name: track["name"], duration: track["duration"], 
+                    tracks_filter={name: track["name"], duration: track["duration"], 
                     times_played: track["times_played"],artist: track["artist"],album: track["album"],self: track["self"]}
                     tracks_artist.append(tracks_filter)
                 end
@@ -85,7 +85,7 @@ class TrackController < ApplicationController
             tracks_album=[]
             tracks.each do |track|
                 if track["album"]==album_url
-                    tracks_filter={track_id: track["track_id"], name: track["name"], duration: track["duration"], 
+                    tracks_filter={name: track["name"], duration: track["duration"], 
                     times_played: track["times_played"],artist: track["artist"],album: track["album"],self: track["self"]}
                     tracks_album.append(tracks_filter)
                 end
@@ -102,7 +102,7 @@ class TrackController < ApplicationController
         else
             contador = track["times_played"]+1
             track.update(times_played: contador)
-            track_filter = {track_id: track["track_id"], name: track["name"], duration: track["duration"], 
+            track_filter = {name: track["name"], duration: track["duration"], 
             times_played: track["times_played"],artist: track["artist"],album:track["album"],self: track["self"]}
             
             render json: track_filter, status: 200
@@ -139,7 +139,7 @@ class TrackController < ApplicationController
             end
         end
         track_params = {track_id: name_codificado, name: params[:name], duration: params[:duration],times_played:0,
-        artist: album["artist"], album: "https://ridethelightningrecords.herokuapp.com/albums/"+album["album_id"],self: "https://ridethelightningrecords.herokuapp.com/tracks/"+name_codificado}
+        artist: album["artist"], album: "https://masterofpuppetsapi.herokuapp.com/albums/"+album["album_id"],self: "https://masterofpuppetsapi.herokuapp.com/tracks/"+name_codificado}
     end   
    
 end
