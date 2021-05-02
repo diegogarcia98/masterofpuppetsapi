@@ -1,0 +1,22 @@
+Rails.application.routes.draw do
+  get 'track/index'
+  get 'track/create'
+  get 'track/show'
+  get 'track/tracks_artist'
+  get 'track/tracks_album'
+  get 'track/play_track'
+  get 'track/delete'
+  get 'album/index'
+  get 'album/create'
+  get 'album/show'
+  get 'album/album_artist'
+  get 'album/play_album_tracks'
+  get 'album/delete'
+  get 'artist/index'
+  get 'artist/create'
+  get 'artist/show'
+  get 'artist/play_artist_tracks'
+  get 'artist/delete'
+  get 'artist/method_not_allowed'
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+end

@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  username: postgres
+  password: 84138085
+  pool: 5
+
+production:
+  <<: *default
+  database: apirest2_production
+
+development:
+  <<: *default
+  database: apirest2_development
+
+test:
+  <<: *default
+  database: apirest2_test
