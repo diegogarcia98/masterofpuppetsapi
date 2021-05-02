@@ -83,6 +83,7 @@ class AlbumsController < ApplicationController
         else
             tracks = Track.where("album": album["self"])
             tracks.each do |track|
+                contador = 0
                 contador = track["times_played"]+1
                 track.update(times_played: contador)
             end
@@ -128,7 +129,7 @@ class AlbumsController < ApplicationController
                 i = i+1
             end
         end
-        artist_params = {album_id: name_codificado, name: params[:name], genre: params[:genre],artist: "https://masterofpuppetsapi.herokuapp.com/"+params[:artist_id],
+        artist_params = {album_id: name_codificado, name: params[:name], genre: params[:genre],artist: "https://masterofpuppetsapi.herokuapp.com/artists/"+params[:artist_id],
         tracks: "https://masterofpuppetsapi.herokuapp.com/albums/"+name_codificado+"/tracks",self: "https://masterofpuppetsapi.herokuapp.com/albums/"+name_codificado}
     end  
 end

@@ -57,6 +57,7 @@ class ArtistsController < ApplicationController
         else
             tracks = Track.where("artist": artist["self"])
             tracks.each do |track|
+                contador = 0
                 contador = track["times_played"]+1
                 track.update(times_played: contador)
             end
