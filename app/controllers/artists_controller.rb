@@ -1,5 +1,5 @@
 require "base64"
-class ArtistController < ApplicationController
+class ArtistsController < ApplicationController
     def index
         artists = Artist.all
         artists_filter = []

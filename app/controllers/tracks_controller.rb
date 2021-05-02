@@ -1,5 +1,5 @@
 require "base64"
-class TrackController < ApplicationController
+class TracksController < ApplicationController
     def index
         tracks = Track.all
         tracks_filter = []
