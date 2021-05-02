@@ -8,7 +8,7 @@ class ArtistsController < ApplicationController
             albums: artist["albums"],tracks:artist["tracks"],self: artist["self"]}
             artists_filter.append(new_format)
         end
-        render json: artists_filter, status: :ok
+        render json: artists_filter, status: 200
     end
     
     

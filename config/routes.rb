@@ -30,4 +30,6 @@ Rails.application.routes.draw do
   post "*missing" ,to: 'artists#method_not_allowed'
   put  "*missing" ,to: 'artists#method_not_allowed'
   delete "*missing" ,to: 'artists#method_not_allowed'
+
+  
 end

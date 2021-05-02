@@ -8,7 +8,7 @@ class TracksController < ApplicationController
             times_played: track["times_played"],artist: track["artist"],album:track["album"],self: track["self"]}
             tracks_filter.append(new_format)
         end
-        render json: tracks_filter, status: :ok
+        render json: tracks_filter, status: 200
     end
     
     
